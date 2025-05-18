@@ -38,8 +38,12 @@ class MainActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState) // вызов базовой реализации
         setContentView(R.layout.activity_main)
+
+        if (savedInstanceState != null) {
+            currentIndex = savedInstanceState.getInt("currentIndex", 0)
+        }
 
         imageView = findViewById(R.id.imageView)
         imageTitle = findViewById(R.id.imageTitle)
@@ -86,4 +90,9 @@ class MainActivity : AppCompatActivity() {
         val author: String,
         val year: Int
     )
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("currentIndex", currentIndex) // сохраняем текущих индекс
+    }
 }
